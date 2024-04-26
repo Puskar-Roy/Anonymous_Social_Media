@@ -42,7 +42,6 @@ export const auth = createSlice({
       };
       // Save the state to localStorage
       localStorage.setItem("auth", JSON.stringify(newState));
-     
       return newState;
     },
   },

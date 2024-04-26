@@ -1,15 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { login } from "@/redux/features/authSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/redux/store";
+import { useRouter } from "next/navigation";
+
 const page = () => {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const [userName, setUserName] = useState<string>("");
   const [userEmail, setEmail] = useState<string>("");
+  const user = useSelector((state: RootState) => state.authReducer.value);
+  useEffect(() => {
+    if (user.isAuth === true) {
+      return router.push("/");
+    }
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(login({email:userEmail,username:userName}))
+    dispatch(login({ email: userEmail, username: userName }));
     alert("Login Successfull!");
   };
 
