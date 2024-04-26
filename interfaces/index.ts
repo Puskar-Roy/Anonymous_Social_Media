@@ -3,6 +3,7 @@ export interface Authstate {
   userName: string;
   uuid: string;
   isAdmin: boolean;
+  email:string;
 }
 
 export interface InitialAuthState {
